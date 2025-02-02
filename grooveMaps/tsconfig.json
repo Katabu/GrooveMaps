@@ -1,0 +1,13 @@
+{
+  "extends": "./.nuxt/tsconfig.json", // If Nuxt scaffolds a tsconfig, extend it
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    // DOM definitions
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    // Possibly helpful
+    "types": ["@types/node"]
+  }
+}
