@@ -4,10 +4,10 @@ import Menubar from 'primevue/menubar'
 import Button from 'primevue/button'
 
 const menuItems = ref([
-  { label: 'Home', icon: 'pi pi-home', to: '/' },
-  { label: 'Events', icon: 'pi pi-calendar', to: '/events' },
-  { label: 'About', icon: 'pi pi-info-circle', to: '/about' },
-  { label: 'Contact', icon: 'pi pi-envelope', to: '/contact' }
+  { label: 'Home', icon: 'pi pi-home', url: '/' },
+  { label: 'Events', icon: 'pi pi-calendar', url: '/events' },
+  { label: 'About', icon: 'pi pi-info-circle', url: '/about' },
+  { label: 'Contact', icon: 'pi pi-envelope', url: '/contact' }
 ])
 </script>
 
