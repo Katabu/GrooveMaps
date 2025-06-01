@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   modules: ["@primevue/nuxt-module", "@pinia/nuxt"],
-  css: ["@/assets/css/main.css", "mapbox-gl/dist/mapbox-gl.css"],
+  css: ["@/assets/css/main.css", "mapbox-gl/dist/mapbox-gl.css", "primeicons/primeicons.css"],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -52,6 +52,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       mapboxToken: process.env.MAPBOX_TOKEN,
+      apiBaseUrl: process.env.API_BASE_URL || 'https://api.localbuzz.live'
     },
   },
 });

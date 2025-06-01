@@ -15,6 +15,7 @@
     "@mapbox/search-js-web": "^1.0.0-beta.25",
     "@pinia/nuxt": "^0.9.0",
     "@primevue/themes": "^4.2.1",
+    "axios": "^1.7.9",
     "mapbox-gl": "^3.9.1",
     "nuxt": "^3.15.4",
     "pinia": "^2.3.1",

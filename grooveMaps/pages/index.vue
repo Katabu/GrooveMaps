@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { useRouter, useRuntimeConfig } from "#imports";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import mapboxgl from "mapbox-gl";
@@ -18,28 +20,42 @@ onMounted(() => {
   geocoder.addTo("#geocoder-container");
 });
 
-//TODO: add some error handling if not done correctly
-function searchLocation(useCurrentLocation: boolean) {
+const geocoderData = ref<MapboxFeature | null>(null);
+
+function setGeocoderData(data: string): void {
+  try {
+    geocoderData.value = JSON.parse(data) as MapboxFeature;
+  } catch (error) {
+    console.error("Failed to parse geocoder data", error);
+    geocoderData.value = null;
+  }
+}
+
+function searchLocation(useCurrentLocation: boolean): void {
   if (useCurrentLocation) {
     if (typeof window !== "undefined" && "geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        const { latitude, longitude } = position.coords;
-        router.push(`/map?lng=${longitude}&lat=${latitude}`);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          router.push(`/map?lng=${longitude}&lat=${latitude}`);
+        },
+        (error) => {
+          console.error("Error retrieving current location", error);
+        }
+      );
     }
     return;
   }
-  const location = JSON.parse(geocoder.lastSelected) as MapboxFeature;
-  if (location == null) return;
-  console.log(location);
+  setGeocoderData(geocoder.lastSelected);
+  const location = geocoderData.value;
+  if (!location) return;
   router.push(`/map?lng=${location.center[0]}&lat=${location.center[1]}`);
 }
 </script>
 
 <template>
   <div class="flex justify-center py-16">
-    <Card class="w-2/3">
+    <Card class="w-full md:w-2/3">
       <template #content>
         <div id="geocoder-container" class="flex justify-center"></div>
         <div class="flex justify-center py-3 gap-x-2">
@@ -54,3 +70,7 @@ function searchLocation(useCurrentLocation: boolean) {
     </Card>
   </div>
 </template>
+
+<style scoped>
+
+</style>

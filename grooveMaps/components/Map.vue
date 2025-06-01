@@ -19,7 +19,6 @@ const mapContainer = ref<HTMLElement | null>(null);
 const mapInstance = ref<mapboxgl.Map | null>(null);
 const events = computed(() => store.events);
 
-// TODO: make the center of the map dynamic
 const center: [number, number] = [+props.lng, +props.lat];
 onMounted(() => {
   if (!mapContainer.value) return;
@@ -72,7 +71,7 @@ function addEventToMap(event: EventData) {
 
 <template>
   <div class="flex justify-center py-16 h-2/3">
-    <Card class="w-3/4">
+    <Card class="w-full md:w-3/4 ">
       <template #content>
         <div ref="mapContainer" class="map-container p-4"></div>
       </template>
@@ -86,5 +85,11 @@ function addEventToMap(event: EventData) {
   /* TODO: make height relative? */
   height: 400px;
   position: relative;
+}
+.mapboxgl-ctrl-geocoder {
+  @apply bg-white border border-gray-300 rounded p-2;
+}
+:deep(.mapboxgl-ctrl-geocoder--input) {
+  @apply w-full  text-sm;
 }
 </style>

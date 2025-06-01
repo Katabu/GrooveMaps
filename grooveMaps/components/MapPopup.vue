@@ -13,7 +13,7 @@ const props = defineProps({
         <h3>{{props.title}}</h3>
         <p>{{props.description}}</p>
 
-        <!-- TODO: style button. make it only for userss -->
+        <!-- TODO: style button. make it only for users -->
         <Button>I'm going!</Button>
     </div>
 </template>
